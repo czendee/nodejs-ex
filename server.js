@@ -67,6 +67,7 @@ app.get('/', function (req, res) {
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
+      count=count+11;
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
