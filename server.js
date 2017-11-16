@@ -63,7 +63,6 @@ app.get('/', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var colrobot = db.collection('robotstep');
 
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
