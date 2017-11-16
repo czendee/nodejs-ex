@@ -104,7 +104,6 @@ app.get('/robotpaso', function (req, res) {
     // Create a document with request IP and current time of request
     colrobot.insert({ip: req.ip, date: Date.now()});
 
-
     db.collection('robotstep').count(function(err, count ){
       count=count+10;
       res.send('{ robotseq: ' + count + '}');
