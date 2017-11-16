@@ -47,3 +47,5 @@ spec:
         resources:
           limits:
             memory: {{ .Values.memory_limit | quote }}
+          requests:
+            cpu: 200m 
