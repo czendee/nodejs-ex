@@ -63,6 +63,8 @@ app.get('/', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
+    var colrobot = db.collection('robotstep');
+
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
@@ -88,6 +90,28 @@ app.get('/pagecount', function (req, res) {
     });
   } else {
     res.send('{ pageCount: -1 }');
+  }
+});
+
+app.get('/robotpaso', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    var colrobot = db.collection('robotstep');
+
+    // Create a document with request IP and current time of request
+    colrobot.insert({ip: req.ip, date: Date.now()});
+
+
+    db.collection('robotstep').count(function(err, count ){
+      count=count+10;
+      res.send('{ robotseq: ' + count + '}');
+    });
+  } else {
+    res.send('{ robotseq: -1 }');
   }
 });
 
